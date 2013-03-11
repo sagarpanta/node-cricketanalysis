@@ -31,13 +31,11 @@ if (process.env.REDISTOGO_URL) {
 } else {
 	var redis = require('redis');
 	 bat_publisher = redis.createClient();
-	 date_publisher = redis.createClient();
 	 bowl_publisher = redis.createClient();
 	 //cmi = clientkey matchkey and inning
 	 cmi_publisher = redis.createClient();
 	 score_publisher = redis.createClient();
 	 bat_subscriber = redis.createClient();
-	 date_subscriber = redis.createClient();
 	 bowl_subscriber = redis.createClient();
 	 cmi_subscriber = redis.createClient();
 	 score_subscriber = redis.createClient();
@@ -45,7 +43,6 @@ if (process.env.REDISTOGO_URL) {
 
 
  bat_subscriber.subscribe('bat_score');
- date_subscriber.subscribe('date');
  bowl_subscriber.subscribe('bowl_score');
  cmi_subscriber.subscribe('cmi');
  score_subscriber.subscribe('score');
