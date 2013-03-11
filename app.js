@@ -9,20 +9,25 @@ server.listen(port);
 
 if (process.env.REDISTOGO_URL) {
 	var rtg   = require("url").parse(process.env.REDISTOGO_URL);
-	var	publisher = require("redis").createClient(rtg.port, rtg.hostname);
-	var publisher1 = require("redis").createClient(rtg.port, rtg.hostname);
-	var subscriber = require("redis").createClient(rtg.port, rtg.hostname);
-	var date_subscriber = require("redis").createClient(rtg.port, rtg.hostname);
-	bat_publisher.auth(rtg.auth.split(":")[1]);
-	date_publisher.auth(rtg.auth.split(":")[1]);
-	bowl_publisher.auth(rtg.auth.split(":")[1]);
-	cmi_publisher.auth(rtg.auth.split(":")[1]);
-	score_publisher.auth(rtg.auth.split(":")[1]);
-	bat_subscriber.auth(rtg.auth.split(":")[1]);
-	date_subscriber.auth(rtg.auth.split(":")[1]);
-	bowl_subscriber.auth(rtg.auth.split(":")[1]);
-	cmi_subscriber.auth(rtg.auth.split(":")[1]);
-	score_subscriber.auth(rtg.auth.split(":")[1]);
+	var	bat_publisher = require("redis").createClient(rtg.port, rtg.hostname);
+	var bowl_publisher = require("redis").createClient(rtg.port, rtg.hostname);
+	var	cmi_publisher = require("redis").createClient(rtg.port, rtg.hostname);
+	var score_publisher = require("redis").createClient(rtg.port, rtg.hostname);
+	
+	var bat_subscriber = require("redis").createClient(rtg.port, rtg.hostname);
+	var bowl_subscriber = require("redis").createClient(rtg.port, rtg.hostname);
+	var cmi_subscriber = require("redis").createClient(rtg.port, rtg.hostname);
+	var score_subscriber = require("redis").createClient(rtg.port, rtg.hostname);
+	
+	var bat_publisher.auth(rtg.auth.split(":")[1]);
+	var bowl_publisher.auth(rtg.auth.split(":")[1]);
+	var cmi_publisher.auth(rtg.auth.split(":")[1]);
+	var score_publisher.auth(rtg.auth.split(":")[1]);
+	
+	var bat_subscriber.auth(rtg.auth.split(":")[1]);
+	var bowl_subscriber.auth(rtg.auth.split(":")[1]);
+	var cmi_subscriber.auth(rtg.auth.split(":")[1]);
+	var score_subscriber.auth(rtg.auth.split(":")[1]);
 } else {
 	var redis = require('redis');
 	 bat_publisher = redis.createClient();
