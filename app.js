@@ -89,7 +89,7 @@ function checkDB(_date, cmi){
 		}
 		var bat_query = client.query("select id, clientkey, matchkey, inning, batsmankey,batsman, position, fielder, outtype, bowler, runs, ballsfaced, zeros, strikerate, fours, sixes, hilite, nonstrikerkey from battingscorecards where updated_at > '" + _date+"'");
 		var bowl_query = client.query("select id, clientkey, matchkey, inning, bowler, bowlerkey, overs, runs, maidens, wickets, economy, fours, sixes, wides, noballs, last_run, hilite, position, updated_at from bowlingscorecards where updated_at > '"+ _date+"'");
-		var score_query = client.query("select clientkey, matchkey, inning, sum(wicketsgone) as wicketsgone, max(totalovers) as totalovers, sum(coalesce(runs,0)+coalesce(byes,0)+coalesce(legbyes,0)+coalesce(wides,0)+coalesce(noballs,0)) as score from bowlingscorecards where clientkey="+ clientkey +" and matchkey="+matchkey+" and inning="+inning+" group by clientkey, matchkey, inning");
+		var score_query = client.query("select clientkey, matchkey, inning, sum(wicketsgone) as wicketsgone, max(totalovers) as totalovers, sum(coalesce(runs,0)+coalesce(byes,0)+coalesce(legbyes,0)) as score from bowlingscorecards where clientkey="+ clientkey +" and matchkey="+matchkey+" and inning="+inning+" group by clientkey, matchkey, inning");
 		bat_query.on('row', function(row){
 			bat_publisher.publish('bat_score', JSON.stringify({id: row.id, matchkey:row.matchkey, inning:row.inning, clientkey:row.clientkey, batsmankey:row.batsmankey, batsman:row.batsman, position:row.position, fielder:row.fielder, outtype:row.outtype, bowler:row.bowler, runs:row.runs, ballsfaced:row.ballsfaced, zeros:row.zeros, strikerate:row.strikerate, fours:row.fours, sixes:row.sixes,hilite:row.hilite, nonstrikerkey:row.nonstrikerkey }));
 		});
