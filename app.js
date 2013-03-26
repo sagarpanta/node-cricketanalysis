@@ -5,6 +5,9 @@ var http = require('http');
 var server = http.createServer(app);
 var port = process.env.PORT || 1212;
 var io = require('socket.io').listen(server);
+io.enable('browser client minification');  // send minified client
+io.enable('browser client etag');          // apply etag caching logic based on version number
+io.enable('browser client gzip'); 
 server.listen(port);
 
 if (process.env.REDISTOGO_URL) {
